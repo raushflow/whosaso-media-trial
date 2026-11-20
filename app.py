@@ -68,6 +68,19 @@ def transcode():
         return {'trial': 'synthetic-transcode-probe', 'versions': versions(),
                 'generate_15s_1080p': gen, 'transcode_to_360p': enc}
 
+def digests():
+    with LOCK:
+        g = run_timed(['python3', 'gen_fixtures.py'], 300)
+        try:
+            gen = json.load(open(os.path.join(ROOT, 'GENERATED-DIGESTS.json')))
+        except Exception as e:
+            return {'trial': 'fixture-digest-compare', 'error': str(e), 'generate': g}
+        shipped = json.load(open(os.path.join(ROOT, 'FIXTURE-DIGESTS.json')))
+        diff = {k: {'shipped': shipped.get(k), 'generated': gen.get(k)}
+                for k in sorted(set(shipped) | set(gen))
+                if shipped.get(k) != gen.get(k)}
+        return {'trial': 'fixture-digest-compare', 'mismatches': diff, 'generate': g}
+
 class H(BaseHTTPRequestHandler):
     def _send(self, obj, code=200):
         body = json.dumps(obj, indent=2).encode()
@@ -87,10 +100,12 @@ class H(BaseHTTPRequestHandler):
                 if fresh or 'trial' not in CACHE:
                     CACHE['trial'] = trial()
                 return self._send(CACHE['trial'])
+            if u.path == '/trial/digests':
+                return self._send(digests())
             if u.path == '/trial/transcode':
                 return self._send(transcode())
             return self._send({'error': 'unknown path',
-                               'paths': ['/health', '/trial', '/trial/transcode']}, 404)
+                               'paths': ['/health', '/trial', '/trial/transcode', '/trial/digests']}, 404)
         except subprocess.TimeoutExpired:
             return self._send({'error': 'step timed out'}, 504)
         except Exception as e:
