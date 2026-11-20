@@ -1,0 +1,54 @@
+{
+  "base.mp4": {
+    "bytes": 141313,
+    "sha256": "61c42c6719c66bf8a0bf8361fc7bcd8135ae813ac62ed6fad35f11f492707ed9"
+  },
+  "f1-udta.mp4": {
+    "bytes": 141348,
+    "sha256": "19b441d345d39ef0e8bc254a96015eb927afdbdb70840f2c003f8ea33d17e240"
+  },
+  "f10-noaudio.mp4": {
+    "bytes": 115861,
+    "sha256": "91557a8a850b8741a134acebe0d8971c4033fcff8321a5d8dc4531b02ecb7e97"
+  },
+  "f11-twoaudio.mp4": {
+    "bytes": 174052,
+    "sha256": "8625127885b6873a05092a5d6f4f9c692acb066ce0cc5880f5d91e99f3a8f4e1"
+  },
+  "f12-avoffset.mp4": {
+    "bytes": 146512,
+    "sha256": "af2e2688b208e740748ece70d7deb7526b608b36eadb712755ab3c52d2b96499"
+  },
+  "f2-mdta.mov": {
+    "bytes": 141779,
+    "sha256": "4be60a6bfb6d55e91fd58ef200f64e801071182838070a17373c50745a8a21f7"
+  },
+  "f3-pertrack.mp4": {
+    "bytes": 141383,
+    "sha256": "428a6eafdb970428300d4f8c0778cabde7acc3528875bcac1d1e40fcbc6491b6"
+  },
+  "f4-rotate.mp4": {
+    "bytes": 141348,
+    "sha256": "24c89fd6febbcabed3410295574b8d31791c84f6edc427f69dd47c1ceb88128f"
+  },
+  "f5-unknown-box.mp4": {
+    "bytes": 141396,
+    "sha256": "d7b6887c80ffd5eee7848d78dfe2f541d7931c59849b4627cc8df53fe83bc4a1"
+  },
+  "f6-novel-box.mp4": {
+    "bytes": 141359,
+    "sha256": "86562b32f7d0b12d9d337b64d5edb0d8b08da4c0971cc9bdb1315127c321f709"
+  },
+  "f7-datatrack.mp4": {
+    "bytes": 141738,
+    "sha256": "1b2aadba8ddfba27e275843423b369546dd908a0ce882015e7dd97d14389f69e"
+  },
+  "f8-sei-essence.mp4": {
+    "bytes": 146804,
+    "sha256": "da9c7cecf571ef88242683d9c6abf3e7712ee9c373d10ac435772f52986fc5eb"
+  },
+  "f9-hevc-hlg.mov": {
+    "bytes": 104887,
+    "sha256": "53c431dcea54792033fdc5b13d78ea6544876b06d191269c7aacde645122dccf"
+  }
+}
