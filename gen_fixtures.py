@@ -12,7 +12,7 @@ LOC = '+19.0760+72.8777+005.0/'
 
 
 def ff(args):
-    subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y'] + args, check=True)
+    subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-cpuflags', '0'] + args, check=True)
 
 
 def make():
