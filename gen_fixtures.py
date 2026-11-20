@@ -19,7 +19,7 @@ def make():
     base = F / 'base.mp4'
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3',
         '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3',
-        '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', str(base)])
+        '-c:v', 'libx264', '-threads', '1', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', str(base)])
     ff(['-i', str(base), '-c', 'copy',
         '-metadata', 'location=' + LOC, '-metadata', 'location-eng=' + LOC,
         '-metadata', 'make=SyntheticCam', '-metadata', 'model=Unit1', str(F / 'f1-udta.mp4')])
@@ -41,17 +41,17 @@ def make():
     make_hevc_hlg_fixture(F / 'f9-hevc-hlg.mov')
     # Audio profile characterization fixtures (supported-profile gate; no profile decision here).
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3', '-an',
-        '-c:v', 'libx264', '-bf', '0', '-pix_fmt', 'yuv420p',
+        '-c:v', 'libx264', '-threads', '1', '-bf', '0', '-pix_fmt', 'yuv420p',
         '-metadata', 'location=' + LOC, str(F / 'f10-noaudio.mp4')])
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3',
         '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3',
         '-f', 'lavfi', '-i', 'sine=frequency=880:duration=3',
         '-map', '0:v', '-map', '1:a', '-map', '2:a',
-        '-c:v', 'libx264', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac',
+        '-c:v', 'libx264', '-threads', '1', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac',
         '-metadata', 'location=' + LOC, str(F / 'f11-twoaudio.mp4')])
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3',
         '-itsoffset', '0.5', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3',
-        '-c:v', 'libx264', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac',
+        '-c:v', 'libx264', '-threads', '1', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac',
         '-metadata', 'location=' + LOC, str(F / 'f12-avoffset.mp4')])
 
 
@@ -126,7 +126,7 @@ def make_sei_essence_fixture(dst):
     bf0 = tmp / 'base-bf0.mp4'
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3',
         '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3',
-        '-c:v', 'libx264', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest',
+        '-c:v', 'libx264', '-threads', '1', '-bf', '0', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest',
         str(bf0)])
     raw = tmp / 'base.h264'
     ff(['-i', str(bf0), '-c:v', 'copy', '-an', '-bsf:v', 'h264_mp4toannexb', str(raw)])
