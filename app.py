@@ -95,15 +95,17 @@ class H(BaseHTTPRequestHandler):
         try:
             if u.path == '/health':
                 return self._send({'ok': True})
+            fresh = parse_qs(u.query).get('fresh') == ['1']
             if u.path == '/trial':
-                fresh = parse_qs(u.query).get('fresh') == ['1']
                 if fresh or 'trial' not in CACHE:
                     CACHE['trial'] = trial()
                 return self._send(CACHE['trial'])
             if u.path == '/trial/digests':
                 return self._send(digests())
             if u.path == '/trial/transcode':
-                return self._send(transcode())
+                if fresh or 'transcode' not in CACHE:
+                    CACHE['transcode'] = transcode()
+                return self._send(CACHE['transcode'])
             return self._send({'error': 'unknown path',
                                'paths': ['/health', '/trial', '/trial/transcode', '/trial/digests']}, 404)
         except subprocess.TimeoutExpired:
