@@ -152,7 +152,7 @@ def make_hevc_hlg_fixture(dst):
     """10-bit HEVC HLG/BT.2020 (tag hvc1) with container location metadata."""
     ff(['-f', 'lavfi', '-i', 'testsrc2=size=320x240:rate=30:duration=3',
         '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3',
-        '-c:v', 'libx265', '-pix_fmt', 'yuv420p10le',
+        '-c:v', 'libx265', '-x265-params', 'pools=1', '-pix_fmt', 'yuv420p10le',
         '-color_primaries', 'bt2020', '-color_trc', 'arib-std-b67',
         '-colorspace', 'bt2020nc', '-tag:v', 'hvc1', '-c:a', 'aac', '-shortest',
         '-metadata', 'location=' + LOC, str(dst)])
